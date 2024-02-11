@@ -1,80 +1,105 @@
 package entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import embedded.NameIdentifier;
+import org.hibernate.annotations.CreationTimestamp;
 
-//@Entity(name = "customer")
-@Entity
-@Table(name = "customer")
+import javax.persistence.*;
+import java.sql.Timestamp;
 
+
+@Entity(name = "customer")
 public class Customer {
-
-    @Id // Tells Hibernate that is the Primary key of this.
-
-    @Column(name = "customerId")
+    @Id // tells hibernate to this is primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
     private int id;
 
-    @Column(name = "customerName")
-    private String name;
+    @Column(name = "customer_name")
+    private NameIdentifier name;
 
-    @Column(name = "customerAddress")
+    @Transient
+    @Column(name = "customer_address")
     private String address;
 
-    @Column(name = "customerSalary")
+    @Column(name = "customer_salary")
+    @Transient
     private double salary;
 
-    public void setId(int id) {
+    @Transient
+    @Column(name = "m_number")
+    private int moNumber;
+
+    @CreationTimestamp
+    private Timestamp timestamp;
+
+    public Customer() {
+    }
+
+    public Customer(int id, NameIdentifier name, String address, double salary, int moNumber, Timestamp timestamp) {
         this.id = id;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public void setAddress(String address) {
         this.address = address;
-    }
-
-    public void setSalary(double salary) {
         this.salary = salary;
-    }
-
-    public void setMobileNumber(int mobileNumber) {
-        this.mobileNumber = mobileNumber;
+        this.moNumber = moNumber;
+        this.timestamp = timestamp;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public NameIdentifier getName() {
         return name;
+    }
+
+    public void setName(NameIdentifier name) {
+        this.name = name;
     }
 
     public String getAddress() {
         return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public double getSalary() {
         return salary;
     }
 
-    public int getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public Customer() {
-        this.id = id;
-        this.name = name;
-        this.address = address;
+    public void setSalary(double salary) {
         this.salary = salary;
-        this.mobileNumber = mobileNumber;
     }
 
-    @Column(name = "customerMobileNumber")
-    private int mobileNumber;
+    public int getMoNumber() {
+        return moNumber;
+    }
 
+    public void setMoNumber(int moNumber) {
+        this.moNumber = moNumber;
+    }
 
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", salary=" + salary +
+                ", moNumber=" + moNumber +
+                '}';
+    }
 }

@@ -1,109 +1,69 @@
 import config.SessionFactoryConfig;
+import embedded.NameIdentifier;
 import entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class Appinitializer {
-
+public class AppInitializer {
     public static void main(String[] args) {
+        System.out.println("Create");
+        Session session = SessionFactoryConfig
+                .getInstance()
+                .getSession();
 
-        try {
+        Transaction transaction = session.beginTransaction();
 
-            //Save
+        Customer customer = new Customer();
+        customer.setId(1);
+        NameIdentifier nameIdentifier = new NameIdentifier();
+        nameIdentifier.setFirstName("Malith");
+        nameIdentifier.setMiddleName("Shehan");
+        nameIdentifier.setLastName("Sandakalum");
+        customer.setName(nameIdentifier);
+        customer.setAddress("Galle");
+        customer.setSalary(99000.00);
+        customer.setMoNumber(072-5592323);
 
-            System.out.println("------------------Save-------------------------");
-            Session session = SessionFactoryConfig
-                    .getInstance()
-                    .getSession();
+        session.save(customer);
 
-            Transaction transaction = session.beginTransaction();
-
-            Customer customer = new Customer();
-
-            customer.setId(1);
-            customer.setName("Charaka");
-            customer.setAddress("Colombo");
-            customer.setSalary(30000);
-            customer.setMoNumber(715825704);
-
-            session.save(customer);
-
-            transaction.commit();
-
-            System.out.println("------------------Saved-------------------------");
-
-            session.close();
-
-//
-//            //2 Get
-//
-//          System.out.println("------------------Read-------------------------");
-//
-//            Session getSession = SessionFactoryConfig
-//                    .getInstance().getSession();
-//
-//            Customer existingCustomer =
-//                    getSession
-//                            .get(Customer.class,1);
-//
-//            System.out.println("Existing customer :"+existingCustomer);
-//
-//            System.out.println("------------------Read Completed-------------------------");
-//
-//            getSession.close();
-//
-//
-//            //Update
-//
-//            System.out.println("------------------Update-------------------------");
-//
-//            Session updateSession =
-//                    SessionFactoryConfig
-//                            .getInstance().getSession();
-//
-//            Transaction updateTransaction =
-//                    updateSession.beginTransaction();
-//
-//            Customer existingCus = updateSession.get(Customer.class,1);
-//
-//            existingCus.setAddress("Colombo");
-//            updateSession.update(existingCus);
-//
-//            updateTransaction.commit();
-//
-//            System.out.println("------------------Updated-------------------------");
-//
-//            updateSession.close();
-//
-//
-//            //Delete
-//
-//            System.out.println("------------------Delete-------------------------");
-//
-//            Session deleteSession =
-//                    SessionFactoryConfig.getInstance().getSession();
-//
-//            Transaction deleteTransaction = deleteSession
-//                    .beginTransaction();
-//
-//            Customer deleteCus = deleteSession.get(Customer.class,1);
-//
-//            deleteSession.delete(deleteCus);
-//
-//            deleteTransaction.commit();
-//
-//            System.out.println("------------------Deleted-------------------------");
-//
-//            deleteSession.close();
+        transaction.commit();
 
 
 
-        } catch (Exception e) {
+        session.close();
 
-            e.printStackTrace();
+//        System.out.println("Update");
+//
+//        Session getSession = SessionFactoryConfig.
+//                getInstance().
+//                getSession();
+//        Customer existingCustomer =
+//                getSession.
+//                        get(Customer.class,1);
+//        System.out.println("Existting Customer" + existingCustomer);
+//        session.close();
+//
+//        Session updateSession = SessionFactoryConfig.getInstance().getSession();
+//
+//        Transaction updateTransaction = updateSession.beginTransaction();
+//
+//        Customer existingCus = updateSession.get(Customer.class,1);
+//        existingCus.setAddress("Matara");
+//        updateSession.update(existingCus);
+//        updateTransaction.commit();
+//        updateSession.close();
+//
+//        System.out.println("Delete");
+//
+//    Session deleteSession = SessionFactoryConfig.getInstance().getSession();
+//
+//        Customer existingCust = deleteSession.get(Customer.class,1);
+//        existingCust.setAddress("Matara");
+//    Transaction deleteTransaction =
+//            deleteSession.beginTransaction();
+//
+//    deleteSession.delete(existingCust);
+//    deleteTransaction.commit();
 
-            System.out.println("Error :"+ e.getMessage());
-
-        }
     }
 }

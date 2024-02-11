@@ -13,10 +13,10 @@ public class Applnitializer {
         Transaction transaction = session.beginTransaction();
 
         Customer customer = new Customer();
-        customer.setId(001);
-        customer.setName("Malith");
-        customer.setAddress("Galle");
-        customer.setSalary(52000.00);
+        customer.setId(002);
+        customer.setName("Shehan");
+        customer.setAddress("Mathara");
+        customer.setSalary(82000.00);
 
         session.save(customer);
 

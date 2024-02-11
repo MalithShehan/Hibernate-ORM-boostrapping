@@ -28,12 +28,14 @@ public class SessionFactoryConfig {
 
     public Session getSession() {
         //1. Creates a Service Registry.
-       StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+       StandardServiceRegistry serviceRegistry =
+               new StandardServiceRegistryBuilder()
                 .configure()
                 .build();
 
        //2. Creates a Metadata Object.
-        Metadata metadata = new MetadataSources(serviceRegistry)
+        Metadata metadata =
+                new MetadataSources(serviceRegistry)
                 .addAnnotatedClass(Customer.class)
                 .getMetadataBuilder()
                 .build();

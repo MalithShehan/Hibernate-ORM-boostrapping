@@ -25,8 +25,6 @@ public class Customer {
     @Column(name = "customerSalary")
     private double salary;
 
-    public Customer() {}
-
     public void setId(int id) {
         this.id = id;
     }
@@ -41,6 +39,10 @@ public class Customer {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public void setMobileNumber(int mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public int getId() {
@@ -59,10 +61,20 @@ public class Customer {
         return salary;
     }
 
-    public Customer(int id, String name, String address, double salary) {
+    public int getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public Customer() {
         this.id = id;
         this.name = name;
         this.address = address;
         this.salary = salary;
+        this.mobileNumber = mobileNumber;
     }
+
+    @Column(name = "customerMobileNumber")
+    private int mobileNumber;
+
+
 }

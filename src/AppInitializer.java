@@ -16,7 +16,7 @@ public class AppInitializer {
         Customer customer = new Customer();
         customer.setId(1);
         NameIdentifier nameIdentifier = new NameIdentifier();
-        nameIdentifier.setFirstName("Malith");
+        nameIdentifier.setFirstName("");
         nameIdentifier.setMiddleName("Shehan");
         nameIdentifier.setLastName("Sandakalum");
         customer.setName(nameIdentifier);
